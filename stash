@@ -24,7 +24,7 @@ refresh() {
 }
 
 init() {
-    git checkout -b $HOST
+    [[ $(git branch --list $HOST) ]] || git checkout -b $HOST
     refresh
 }
 

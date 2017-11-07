@@ -70,9 +70,6 @@ $ git add ...
 $ git commit -m'Initial commit'
 
 # Note: you must remove all local files that will now be linked by stow.
-# Otherwise, stow will fail and stash will be left in a bit of a broken state.
-# Stash should probably allow for idempotency here when the local branch
-# already exists.
 
 # Finally, lets initialize stash for the local system
 $ ~/stash/stash init

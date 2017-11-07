@@ -6,9 +6,9 @@
 
 set -eu
 
-STASH="~/stash"
-PACKAGE="stow"
-TARGET="~"
+STASH=~/stash
+PACKAGE=stow
+TARGET=~
 HOST=$(hostname -s)
 
 usage() {

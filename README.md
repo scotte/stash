@@ -1,22 +1,23 @@
 # stash - A simple wrapper around stow and git for managing dotfiles
 
-** Consider this a work in progress! **
+**Consider this a work in progress!**
 
 Stash is a wrapper around stow and git to help manage dotfiles across multiple
 machines.
 
 The basic idea with stash is that you create a git repository with all the
-dotfiles and config files that you want to have stow manage.
+dotfiles and config files that you want to have stow manage for your user
+across multiple machines.
 
 The "master" branch should be for configuration files that are common - files
 that are common to all your systems (even if they will be customized per
 system). Consider "master" as a starting place for customized configurations,
 as well as configurations that don't vary by machine.
 
-Additionally, there will be a separate branch for every system. This branch
-will be named with the systems hostname (specifically, "hostname -s"), and the
+Stash will create a separate branch for every system it's used on. This branch
+will be named with the system's hostname (specifically, "hostname -s"), and the
 idea is that files in this branch are customized from the common defaults, and
-can contain addition files as well if you like.
+can contain any addition files as well that are specific to the local host.
 
 Stash will rebase the local hostname branch on "master", to integrate changes
 in the upstream common version. Obviously, this can result in conflicts that
@@ -70,6 +71,8 @@ $ git commit -m'Initial commit'
 
 # Note: you must remove all local files that will now be linked by stow.
 # Otherwise, stow will fail and stash will be left in a bit of a broken state.
+# Stash should probably allow for idempotency here when the local branch
+# already exists.
 
 # Finally, lets initialize stash for the local system
 $ ~/stash/stash init

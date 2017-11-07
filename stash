@@ -12,38 +12,16 @@ TARGET=~
 HOST=$(hostname -s)
 
 usage() {
-    echo "Usage: $0 [init] [update]"
-    echo -e "\tinit   - Initialize this host from the master repository"
-    echo -e "\tupdate - Commit local changes and rebase on master"
     echo "$@"
     exit 1
 }
 
-refresh() {
-    stow -v1 -d $STASH -t $TARGET $PACKAGE
-}
-
-init() {
-    [[ $(git branch --list $HOST) ]] || git checkout -b $HOST
-    refresh
-}
-
-update() {
-    git diff --quiet || git commit -a
-    git rebase master
-    refresh
-}
-
-[[ $# < 1 ]] && usage
-
 [[ -d $STASH/$PACKAGE ]] || usage "ERROR: $STASH/$PACKAGE does not exist"
 cd $STASH/$PACKAGE
 
-if [[ $1 == "init" ]]; then
-    init
-elif [[ $1 == "update" ]]; then
-    update
-else
-    usage
-fi
+[[ $(git branch --list $HOST) ]] || git checkout -b $HOST
+git diff --quiet || git commit -a
+git rebase master
+stow -v1 -d $STASH -t $TARGET $PACKAGE
+
 exit 0

@@ -40,14 +40,14 @@ contains your git repository of configuration files.
 * TARGET=~ - This is the target directory for stow.
 * HOST=$(hostname -s) - The name of the branch for the local host.
 
-## Commands
-Stash current has two commands:
+## Running stash
 
-* init - This will create a branch in $STASH/$PACKAGE for the local host, and
-then stow all the files into $TARGET.
-* update - Use this to commit local updates to configuration files, and rebase
-the local branch onto any changes in "master". This will also stow files to
-pick up any changes in "master".
+When run, stash will:
+
+* Create a branch in $STASH/$PACKAGE for the local host, if necessary.
+* Commit local updates to configuration files if there are local changes.
+* Rebase the local branch onto any changes in "master".
+* Run stow set up symbolic links.
 
 ## Example
 
@@ -71,8 +71,8 @@ $ git commit -m'Initial commit'
 
 # Note: you must remove all local files that will now be linked by stow.
 
-# Finally, lets initialize stash for the local system
-$ ~/stash/stash init
+# Finally, lets run stash for the local system
+$ ~/stash/stash
 Switched to a new branch 'my-desktop'
 LINK: .xsession => stash/stow/.xsession
 LINK: .Xdefaults => stash/stow/.Xdefaults
@@ -82,11 +82,11 @@ LINK: .vimrc => stash/stow/.vimrc
 ```
 
 Now, I can update my local configuration files, customizing them for the local
-system, then when ready to commit changes (and rebase on "master"), I'll use
-stash update:
+system, then when ready to commit changes (and rebase on "master"), I'll run
+stash again:
 
 ```
-$ ~/stash/stash update
+$ ~/stash/stash
 
 # If there are local changes, you'll be tossed into $EDITOR for "git commit".
 Current branch my-desktop is up to date.

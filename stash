@@ -19,7 +19,7 @@ usage() {
 [[ -d $STASH/$PACKAGE ]] || usage "ERROR: $STASH/$PACKAGE does not exist"
 cd $STASH/$PACKAGE
 
-[[ $(git branch --list $HOST) ]] || git checkout -b $HOST
+[[ $(git branch --list $HOST) ]] && git checkout $HOST || git checkout -b $HOST
 git diff --quiet || git commit -a
 git rebase master
 stow -v1 -d $STASH -t $TARGET $PACKAGE

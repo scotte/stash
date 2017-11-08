@@ -17,37 +17,37 @@ as well as configurations that don't vary by machine.
 Stash will create a separate branch for every system it's used on. This branch
 will be named with the system's hostname (specifically, "hostname -s"), and the
 idea is that files in this branch are customized from the common defaults, and
-can contain any addition files as well that are specific to the local host.
+can contain any additional files as well that are specific to the local host.
 
 Stash will rebase the local hostname branch on "master", to integrate changes
 in the upstream common version. Obviously, this can result in conflicts that
-might have to be resolved with git mergetool.
+might have to be resolved with git mergetool (or whatever method you prefer).
 
 Before using stash, you'll need to initialize a git repository (in
-$STASH/$PACKAGE - see the stash script), add an initial set of common files,
+**$STASH/$PACKAGE** - see the stash script), add an initial set of common files,
 and then commit to the "master" branch. All files in this repository will be
-linked (by stow) relative to $TARGET (~ by default).
+linked (by stow) relative to **$TARGET** (~ by default).
 
 Stash only uses a single stow package for all files at this point.
 
 ## Configuration
 
 Currently, stash configuration is done as variables in the stash script.
-* STASH=~/stash - This is the directory that will be the top level stow
+* **STASH=~/stash** - This is the directory that will be the top level stow
 directory.
-* PACKAGE=stow - This is the name of the stow package, and the directory that
+* **PACKAGE=stow** - This is the name of the stow package, and the directory that
 contains your git repository of configuration files.
-* TARGET=~ - This is the target directory for stow.
-* HOST=$(hostname -s) - The name of the branch for the local host.
+* **TARGET=~** - This is the target directory for stow.
+* **HOST=$(hostname -s)** - The name of the branch for the local host.
 
 ## Running stash
 
 When run, stash will:
 
-* Create a branch in $STASH/$PACKAGE for the local host, if necessary.
+* Create a branch in **$STASH/$PACKAGE** for the local host, if necessary.
 * Commit local updates to configuration files if there are local changes.
 * Rebase the local branch onto any changes in "master".
-* Run stow set up symbolic links.
+* Run stow to set up symbolic links.
 
 ## Caveats
 
@@ -57,6 +57,9 @@ host's branch when run, but this could fail if in a bad state. Also, be aware
 that the repository files are symlinked from your real dotfiles - this could
 result in a broken or inconsistent state if you forget to check out the local
 system branch before logging out.
+
+**Please back up your files before you try this script! Bad things might
+happen!**
 
 ## Example
 

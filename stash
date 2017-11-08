@@ -11,12 +11,12 @@ PACKAGE=stow
 TARGET=~
 HOST=$(hostname -s)
 
-usage() {
+error() {
     echo "$@"
     exit 1
 }
 
-[[ -d $STASH/$PACKAGE ]] || usage "ERROR: $STASH/$PACKAGE does not exist"
+[[ -d $STASH/$PACKAGE ]] || error "ERROR: $STASH/$PACKAGE does not exist"
 cd $STASH/$PACKAGE
 
 [[ $(git branch --list $HOST) ]] && git checkout $HOST || git checkout -b $HOST

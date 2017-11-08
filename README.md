@@ -53,10 +53,10 @@ When run, stash will:
 
 The stow directory is linked by your dotfiles. Be careful if you switch
 branches within the repository. Stash will attempt to checkout the local
-host's branch when run, but if this might fail. Also, be aware that the
-repository files are symlinked from your real dotfiles - this could result
-in a broken or inconsistent state if you forget to check out the local branch
-before logging out.
+host's branch when run, but this could fail if in a bad state. Also, be aware
+that the repository files are symlinked from your real dotfiles - this could
+result in a broken or inconsistent state if you forget to check out the local
+system branch before logging out.
 
 ## Example
 

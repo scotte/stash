@@ -65,7 +65,7 @@ This is a rough outline of getting started with stash:
 ```
 # First, lets get stash
 $ cd ~
-$ git clone git@github.com:scotte/stash.git
+$ git clone https://github.com/scotte/stash.git
 $ cd stash
 
 # Next, lets create our git repository for stow

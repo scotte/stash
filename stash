@@ -3,6 +3,8 @@
 # stash - A simple wrapper around stow and git for managing dotfiles
 #
 # https://github.com/scotte/stash
+#
+# stash is licensed under GPLv3. See the LICENSE file for additional details.
 
 set -eu
 

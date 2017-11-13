@@ -24,6 +24,6 @@ cd $STASH/$PACKAGE
 [[ $(git branch --list $HOST) ]] && git checkout $HOST || git checkout -b $HOST
 git diff --quiet || git commit -a
 git rebase master
-stow -v1 -d $STASH -t $TARGET $PACKAGE
+stow --verbose=1 --dir=$STASH --target=$TARGET --ignore=".*\.orig$" $PACKAGE
 
 exit 0

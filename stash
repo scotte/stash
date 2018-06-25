@@ -14,16 +14,16 @@ TARGET=~
 HOST=$(hostname -s)
 
 error() {
-    echo "$@"
+    echo "$*"
     exit 1
 }
 
 [[ -d $STASH/$PACKAGE ]] || error "ERROR: $STASH/$PACKAGE does not exist"
-cd $STASH/$PACKAGE
+cd "$STASH/$PACKAGE"
 
-[[ $(git branch --list $HOST) ]] && git checkout $HOST || git checkout -b $HOST
+[[ $(git branch --list "$HOST") ]] && git checkout "$HOST" || git checkout -b "$HOST"
 git diff --quiet || git commit -a
 git rebase master
-stow --verbose=1 --dir=$STASH --target=$TARGET --ignore=".*\.orig$" $PACKAGE
+stow --verbose=1 --dir="$STASH" --target="$TARGET" --ignore=".*\.orig$" "$PACKAGE"
 
 exit 0
